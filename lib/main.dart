@@ -68,7 +68,8 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => DrawerWidget()),
+                  MaterialPageRoute(
+                      builder: (context) => DrawerWidget(items: sampleList)),
                 );
               },
               child: const Text("navigate forward"),
