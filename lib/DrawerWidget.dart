@@ -11,13 +11,15 @@ class DrawerWidget extends StatefulWidget {
 }
 
 class _DrawerWidgetState extends State<DrawerWidget> {
-
   int _count = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () => Navigator.pop(context, widget.items)),
           title: Text("second screen"),
         ),
         body: ListView.builder(
@@ -30,8 +32,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
         ),
         floatingActionButton: new Builder(builder: (BuildContext context) {
           return new FloatingActionButton(
-              onPressed: () => _addItems(),
-              child: Icon(Icons.add));
+              onPressed: () => _addItems(), child: Icon(Icons.add));
         }));
   }
 
