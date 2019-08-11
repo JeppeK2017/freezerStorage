@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 
-class DrawerWidget extends StatelessWidget {
+class DrawerWidget extends StatefulWidget {
   final List<String> items;
 
   // required list from main page
   DrawerWidget({Key key, @required this.items}) : super(key: key);
+
+  @override
+  _DrawerWidgetState createState() => _DrawerWidgetState();
+}
+
+class _DrawerWidgetState extends State<DrawerWidget> {
+
+  int _count = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -13,21 +21,23 @@ class DrawerWidget extends StatelessWidget {
           title: Text("second screen"),
         ),
         body: ListView.builder(
-          itemCount: items.length,
+          itemCount: widget.items.length,
           itemBuilder: (context, int index) {
             return (ListTile(
-              title: Text(items[index]),
+              title: Text(widget.items[index]),
             ));
           },
         ),
         floatingActionButton: new Builder(builder: (BuildContext context) {
           return new FloatingActionButton(
-              onPressed: () {
-                final snackBar = SnackBar(
-                    content: Text("yes"), duration: Duration(seconds: 4));
-                Scaffold.of(context).showSnackBar(snackBar);
-              },
+              onPressed: () => _addItems(),
               child: Icon(Icons.add));
         }));
+  }
+
+  void _addItems() {
+    setState(() {
+      widget.items.add("yes yes ${_count++}");
+    });
   }
 }
