@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 class DrawerWidget extends StatefulWidget {
+  final String title;
   final List<String> items;
 
   // required list from main page
-  DrawerWidget({Key key, @required this.items}) : super(key: key);
+  DrawerWidget({Key key, @required this.items, @required this.title})
+      : super(key: key);
 
   @override
   _DrawerWidgetState createState() => _DrawerWidgetState();
@@ -21,7 +23,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               leading: IconButton(
                   icon: Icon(Icons.arrow_back),
                   onPressed: () => Navigator.pop(context, widget.items)),
-              title: Text("second screen"),
+              title: Text(widget.title),
             ),
             body: ListView.builder(
               itemCount: widget.items.length,

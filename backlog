@@ -5,7 +5,8 @@
 [] add some kind of database storage
 [] figure out read on startup and write on closing of app
 
-[] pass chosen drawer to drawerWidget from main page
+[OK] pass chosen drawer name to drawerWidget from main page
+[] pass drawer items to drawerWidget from main page
 [OK] add back propagation of updated list from drawer to
 [OK] fix physical back button behaviour
 
