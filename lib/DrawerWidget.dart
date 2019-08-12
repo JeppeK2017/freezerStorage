@@ -15,30 +15,37 @@ class _DrawerWidgetState extends State<DrawerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () => Navigator.pop(context, widget.items)),
-          title: Text("second screen"),
-        ),
-        body: ListView.builder(
-          itemCount: widget.items.length,
-          itemBuilder: (context, int index) {
-            return (ListTile(
-              title: Text(widget.items[index]),
-            ));
-          },
-        ),
-        floatingActionButton: new Builder(builder: (BuildContext context) {
-          return new FloatingActionButton(
-              onPressed: () => _addItems(), child: Icon(Icons.add));
-        }));
+    return new WillPopScope(
+        child: Scaffold(
+            appBar: AppBar(
+              leading: IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  onPressed: () => Navigator.pop(context, widget.items)),
+              title: Text("second screen"),
+            ),
+            body: ListView.builder(
+              itemCount: widget.items.length,
+              itemBuilder: (context, int index) {
+                return (ListTile(
+                  title: Text(widget.items[index]),
+                ));
+              },
+            ),
+            floatingActionButton: new Builder(builder: (BuildContext context) {
+              return new FloatingActionButton(
+                  onPressed: () => _addItems(), child: Icon(Icons.add));
+            })),
+        onWillPop: () => _requestPop(context));
   }
 
   void _addItems() {
     setState(() {
       widget.items.add("yes yes ${_count++}");
     });
+  }
+
+  Future<bool> _requestPop(BuildContext context) {
+    Navigator.pop(context, widget.items);
+    return new Future.value(false);
   }
 }

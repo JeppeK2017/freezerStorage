@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'DrawerWidget.dart';
-import 'dart:developer' as developer;
 
 void main() => runApp(MyApp());
 

@@ -4,7 +4,9 @@
 [] figure out read on startup and write on closing of app
 
 [] pass chosen drawer to drawerWidget from main page
-[] add back propagation of updated list from drawer to main
+[OK] add back propagation of updated list from drawer to
+[OK] fix physical back button behaviour
+
 
 [] add some sort of item class to represent a storage item
 [] add card widget to add new item to drawer list
