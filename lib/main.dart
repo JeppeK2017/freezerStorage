@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:freezer_storage/DrawerCardWidget.dart';
 
-import 'DrawerWidget.dart';
+import 'DrawerContentsWidget.dart';
 
 void main() => runApp(MyApp());
 
@@ -31,6 +32,7 @@ class MyHomePage extends StatelessWidget {
 
   final String title;
   final List<String> sampleList = ["abc", "def", "ghi"];
+  final List<int> drawers = [0, 1, 2, 3, 4, 5, 6];
 
   @override
   Widget build(BuildContext context) {
@@ -46,14 +48,16 @@ class MyHomePage extends StatelessWidget {
             RaisedButton(
               onPressed: () {
                 _navigateAndDisplayList(context);
-//                Navigator.push(
-//                  context,
-//                  MaterialPageRoute(
-//                      builder: (context) => DrawerWidget(items: sampleList)),
-//                );
               },
               child: const Text("navigate forward"),
-            )
+            ),
+            Expanded(
+                child: ListView.builder(
+                    itemCount: drawers.length,
+                    itemBuilder: (context, int index) {
+                      return DrawerFrontWidget(
+                          name: drawers[index].toString() + "abcdefg");
+                    }))
           ],
         ));
   }
