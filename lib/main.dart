@@ -120,7 +120,9 @@ class MyHomePage extends StatelessWidget {
     print('inserted row id: $id');
   }
 
-  _query() {
-    print("query");
+  _query() async {
+    final allRows = await dbHelper.queryAllRows();
+    print("query all rows");
+    allRows.forEach((row) => print(row));
   }
 }

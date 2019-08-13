@@ -6,11 +6,12 @@
 
 [] add some kind of database storage sqflite
 [OK] create database helper
-[] be able to insert data into database
-[]
+[OK] be able to insert data into database
+[] insert data according to list of items
 [] be able to read data from database
 [] be able to remove item from database
 [] be able to query all items in database sorted after name
+[] parameterize insert() and queryAllRows() with table name
 
 [] create new tables for drawers
 
