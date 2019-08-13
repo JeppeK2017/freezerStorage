@@ -68,6 +68,7 @@ class MyHomePage extends StatelessWidget {
                             _navigateAndDisplayList(context, drawerName),
                         child: ListTile(
                             leading: SizedBox(
+                              width: 40,
                               child: Icon(Icons.folder),
                             ),
                             title: Text(drawerName)),
