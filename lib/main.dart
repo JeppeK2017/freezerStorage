@@ -85,7 +85,7 @@ class MyHomePage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         tooltip: "Add new drawer",
-        onPressed: () => {}, //TODO
+        onPressed: () => {},
       ),
     );
   }
@@ -110,6 +110,7 @@ class MyHomePage extends StatelessWidget {
   _insert() {
     print("insert");
   }
+
   _query() {
     print("query");
   }
