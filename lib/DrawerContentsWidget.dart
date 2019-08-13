@@ -35,7 +35,10 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             ),
             floatingActionButton: new Builder(builder: (BuildContext context) {
               return new FloatingActionButton(
-                  onPressed: () => _addItems(), child: Icon(Icons.add));
+                onPressed: () => _addItems(),
+                child: Icon(Icons.add),
+                tooltip: "Add new item",
+              );
             })),
         onWillPop: () => _requestPop(context));
   }

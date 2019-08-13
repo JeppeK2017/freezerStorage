@@ -36,40 +36,58 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          // Here we take the value from the MyHomePage object that was created by
-          // the App.build method, and use it to set our appbar title.
-          title: Text(title),
-        ),
-        body: Column(
-          children: <Widget>[
-            Text("asd"),
-            RaisedButton(
-              onPressed: () {
-                _navigateAndDisplayList(context, "asd");
-              },
-              child: const Text("navigate forward"),
-            ),
-            Expanded(
-                child: ListView.builder(
-                    itemCount: drawers.length,
-                    itemBuilder: (context, int index) {
-                      final String drawerName =
-                          drawers[index].toString() + " abcdefg";
+      appBar: AppBar(
+        // Here we take the value from the MyHomePage object that was created by
+        // the App.build method, and use it to set our appbar title.
+        title: Text(title),
+      ),
+      body: Column(
+        children: <Widget>[
+          Text("asd"),
+          RaisedButton(
+            onPressed: () {
+              _navigateAndDisplayList(context, "asd");
+            },
+            child: const Text("navigate forward"),
+          ),
+          Expanded(
+              child: ListView.builder(
+                  itemCount: drawers.length,
+                  itemBuilder: (context, int index) {
+                    final String drawerName =
+                        drawers[index].toString() + " abcdefg";
 
-                      return Card(
-                        child: InkWell(
-                          splashColor: Colors.lightBlue.withAlpha(30),
-                          onTap: () =>
-                              _navigateAndDisplayList(context, drawerName),
-                          child: ListTile(
-                              leading: Icon(Icons.folder),
-                              title: Text(drawerName)),
-                        ),
-                      );
-                    }))
-          ],
-        ));
+                    return Card(
+                      child: InkWell(
+                        splashColor: Colors.lightBlue.withAlpha(30),
+                        onTap: () =>
+                            _navigateAndDisplayList(context, drawerName),
+                        child: ListTile(
+                            leading: Icon(Icons.folder),
+                            title: Text(drawerName)),
+                      ),
+                    );
+                  })),
+          Row(
+            children: <Widget>[
+              RaisedButton(
+                child: Text("insert"),
+                onPressed: () => _insert(),
+              ),
+              RaisedButton(
+                child: Text("query"),
+                onPressed: () => _query(),
+              )
+            ],
+          )
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        tooltip: "Add new drawer",
+        onPressed: () => {}, //TODO
+      ),
+    );
   }
 
   void _navigateAndDisplayList(BuildContext context, String title) async {
@@ -79,5 +97,20 @@ class MyHomePage extends StatelessWidget {
           builder: (context) => DrawerWidget(items: sampleList, title: title)),
     );
     print(result);
+  }
+
+  // Get list of items in specific drawer
+  List<String> _getDrawerList(String drawerName) {
+    return null;
+  }
+
+  // Store the list of a drawer persistently
+  void _storeDrawerList(String drawerName) {}
+
+  _insert() {
+    print("insert");
+  }
+  _query() {
+    print("query");
   }
 }

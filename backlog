@@ -1,8 +1,16 @@
 [OK] add multiple drawers
 [] be able to create new drawers
+[] add name to drawers
+[] drawers cannot have the same name
 
 
-[] add some kind of database storage
+[] add some kind of database storage sqflite
+[OK] create database helper
+[] be able to insert data into database
+[] be able to read data from database
+[] be able to remove item from database
+[] be able to query all items in database sorted after name
+
 [] figure out read on startup and write on closing of app
 
 [OK] pass chosen drawer name to drawerWidget from main page
