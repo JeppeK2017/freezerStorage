@@ -7,9 +7,13 @@
 [] add some kind of database storage sqflite
 [OK] create database helper
 [] be able to insert data into database
+[]
 [] be able to read data from database
 [] be able to remove item from database
 [] be able to query all items in database sorted after name
+
+[] create new tables for drawers
+
 
 [] figure out read on startup and write on closing of app
 

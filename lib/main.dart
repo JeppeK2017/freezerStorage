@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freezer_storage/DatabaseHelper.dart';
 
 import 'DrawerContentsWidget.dart';
 
@@ -28,6 +29,9 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
+
+  // database instance
+  final dbHelper = DatabaseHelper.instance;
 
   final String title;
   final List<String> sampleList = ["abc", "def", "ghi"];
@@ -63,7 +67,9 @@ class MyHomePage extends StatelessWidget {
                         onTap: () =>
                             _navigateAndDisplayList(context, drawerName),
                         child: ListTile(
-                            leading: Icon(Icons.folder),
+                            leading: SizedBox(
+                              child: Icon(Icons.folder),
+                            ),
                             title: Text(drawerName)),
                       ),
                     );
@@ -107,8 +113,10 @@ class MyHomePage extends StatelessWidget {
   // Store the list of a drawer persistently
   void _storeDrawerList(String drawerName) {}
 
-  _insert() {
-    print("insert");
+  _insert() async {
+    Map<String, dynamic> row = {"name": 'Bob'};
+    final id = await dbHelper.insert(row);
+    print('inserted row id: $id');
   }
 
   _query() {
