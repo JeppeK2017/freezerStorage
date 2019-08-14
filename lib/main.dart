@@ -129,12 +129,27 @@ class _MyHomePageState extends State<MyHomePage> {
       currentList.add(map["name"].toString());
     }
 
-    final modifiedList = await Navigator.push(
+    List<String> modifiedList = await Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => DrawerWidget(items: currentList, title: title)),
+          builder: (context) =>
+              DrawerWidget(items: currentList.toList(), title: title)),
     );
 
+    // three cases
+    // modifiedList larger than currentList => added items
+    // retrieve newly added items
+    modifiedList.removeWhere((String element) => currentList.contains(element));
+    // Insert into database. Title being table name
+    modifiedList.forEach((item) => _insert(title));
+
+    // modifiedList smaller than currentList => removed items
+    // TODO
+
+    // modifiedList same length than currentList => did nothing
+    // TODO
+
+    print(currentList);
     print(modifiedList);
   }
 

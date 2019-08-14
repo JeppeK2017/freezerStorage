@@ -5,12 +5,18 @@
 [OK] update database upon making a new drawer
 [] get drawers from database into list initial setup
 
-[] store modified list into database
+[OK] store modified list into database
+[] _insert method should insert based on the added items from list view
+
+[] handle identical items when inserting into database
+[] handle removal of items via length
+
 
 [OK] create database helper
 [OK] be able to insert data into database
 [OK] insert data according to list of items in table
 [] be able to read data from database
+[] be able to remove data from database
 [] be able to query all items in database sorted after name
 [OK] parameterize insert() and queryAllRows() with table name
 
