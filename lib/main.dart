@@ -125,23 +125,28 @@ class _MyHomePageState extends State<MyHomePage> {
     List<Map<String, dynamic>> currentMapsFromDB = await _queryAll(title);
 
     List<String> currentList = new List<String>();
+    List<String> referenceList = new List<String>();
     for (var map in currentMapsFromDB) {
       currentList.add(map["name"].toString());
+      referenceList.add(map["name"].toString());
     }
 
     List<String> modifiedList = await Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) =>
-              DrawerWidget(items: currentList.toList(), title: title)),
+          builder: (context) => DrawerWidget(items: currentList, title: title)),
     );
 
     // three cases
-    // modifiedList larger than currentList => added items
-    // retrieve newly added items
-    modifiedList.removeWhere((String element) => currentList.contains(element));
-    // Insert into database. Title being table name
-    modifiedList.forEach((item) => _insert(title));
+    if (modifiedList.length > referenceList.length) {
+      // modifiedList larger than currentList => added items
+      // retrieve newly added items
+      modifiedList
+          .removeWhere((String element) => referenceList.contains(element));
+      // Insert into database. Title being table name
+
+      modifiedList.forEach((item) => _insert(title));
+    }
 
     // modifiedList smaller than currentList => removed items
     // TODO
