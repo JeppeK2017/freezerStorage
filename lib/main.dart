@@ -41,7 +41,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<int> _drawers = [0, 1, 2, 3, 4, 5, 6];
+  final List<String> _drawers = new List<String>();
 
   @override
   Widget build(BuildContext context) {
@@ -57,8 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: ListView.builder(
                   itemCount: _drawers.length,
                   itemBuilder: (context, int index) {
-                    final String drawerName =
-                        _drawers[index].toString() + " abcdefg";
+                    final String drawerName = _drawers[index];
 
                     return Card(
                       child: InkWell(
@@ -91,7 +90,12 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         tooltip: "Add new drawer",
-        onPressed: () => _addDrawer(),
+        onPressed: () async {
+          final String newDrawerName = await _asyncInputDialog(context);
+          if (newDrawerName != null && newDrawerName.isNotEmpty) {
+            _addDrawer(newDrawerName);
+          }
+        },
       ),
     );
   }
@@ -120,9 +124,44 @@ class _MyHomePageState extends State<MyHomePage> {
     print(result);
   }
 
-  void _addDrawer() {
-    setState(() {
-      _drawers.add(_drawers.length);
-    });
+  void _addDrawer(String newName) {
+    if (!_drawers.contains(newName)) {
+      setState(() {
+        _drawers.add(newName);
+      });
+    } else {
+      print("name already exists");
+    }
   }
+}
+
+// input dialog for new drawer name
+Future<String> _asyncInputDialog(BuildContext context) async {
+  String input = "";
+  return showDialog<String>(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Enter new drawer name"),
+          content: new Row(
+            children: <Widget>[
+              new Expanded(
+                child: new TextField(
+                  autofocus: true,
+                  decoration: new InputDecoration(
+                      labelText: "Drawer name", hintText: "eg. Drawer 1"),
+                  onChanged: (val) => input = val,
+                ),
+              )
+            ],
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text("Ok"),
+              onPressed: () => Navigator.of(context).pop(input),
+            )
+          ],
+        );
+      });
 }

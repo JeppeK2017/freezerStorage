@@ -1,7 +1,8 @@
 [OK] add multiple drawers
 [OK] be able to create new drawers
-[] add name to drawers
-[] drawers cannot have the same name
+[OK] add name to drawers
+[] drawers cannot have the same name use Forms perhaps or new dialog
+[] update database upon making a new drawer
 
 
 [] add some kind of database storage sqflite
