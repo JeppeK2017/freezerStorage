@@ -1,5 +1,5 @@
 [OK] add multiple drawers
-[] be able to create new drawers
+[OK] be able to create new drawers
 [] add name to drawers
 [] drawers cannot have the same name
 
@@ -14,7 +14,7 @@
 [] parameterize insert() and queryAllRows() with table name
 
 [] create new tables for drawers
-
+[] clean up main page to only contain list of drawers, remove Expanded()
 
 [] figure out read on startup and write on closing of app
 

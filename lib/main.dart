@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
   // database instance
@@ -35,7 +35,13 @@ class MyHomePage extends StatelessWidget {
 
   final String title;
   final List<String> sampleList = ["abc", "def", "ghi"];
-  final List<int> drawers = [0, 1, 2, 3, 4, 5, 6];
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final List<int> _drawers = [0, 1, 2, 3, 4, 5, 6];
 
   @override
   Widget build(BuildContext context) {
@@ -43,23 +49,16 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(title),
+        title: Text(widget.title),
       ),
       body: Column(
         children: <Widget>[
-          Text("asd"),
-          RaisedButton(
-            onPressed: () {
-              _navigateAndDisplayList(context, "asd");
-            },
-            child: const Text("navigate forward"),
-          ),
           Expanded(
               child: ListView.builder(
-                  itemCount: drawers.length,
+                  itemCount: _drawers.length,
                   itemBuilder: (context, int index) {
                     final String drawerName =
-                        drawers[index].toString() + " abcdefg";
+                        _drawers[index].toString() + " abcdefg";
 
                     return Card(
                       child: InkWell(
@@ -92,37 +91,38 @@ class MyHomePage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         tooltip: "Add new drawer",
-        onPressed: () => {},
+        onPressed: () => _addDrawer(),
       ),
     );
+  }
+
+  // insert into a table in database
+  _insert() async {
+    Map<String, dynamic> row = {"name": 'Bob'};
+    final id = await widget.dbHelper.insert(row);
+    print('inserted row id: $id');
+  }
+
+  // query all rows of table in database
+  _query() async {
+    final allRows = await widget.dbHelper.queryAllRows();
+    print("query all rows");
+    allRows.forEach((row) => print(row));
   }
 
   void _navigateAndDisplayList(BuildContext context, String title) async {
     final result = await Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => DrawerWidget(items: sampleList, title: title)),
+          builder: (context) =>
+              DrawerWidget(items: widget.sampleList, title: title)),
     );
     print(result);
   }
 
-  // Get list of items in specific drawer
-  List<String> _getDrawerList(String drawerName) {
-    return null;
-  }
-
-  // Store the list of a drawer persistently
-  void _storeDrawerList(String drawerName) {}
-
-  _insert() async {
-    Map<String, dynamic> row = {"name": 'Bob'};
-    final id = await dbHelper.insert(row);
-    print('inserted row id: $id');
-  }
-
-  _query() async {
-    final allRows = await dbHelper.queryAllRows();
-    print("query all rows");
-    allRows.forEach((row) => print(row));
+  void _addDrawer() {
+    setState(() {
+      _drawers.add(_drawers.length);
+    });
   }
 }
