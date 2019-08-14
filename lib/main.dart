@@ -122,14 +122,17 @@ class _MyHomePageState extends State<MyHomePage> {
 
   // title is the name of the drawer and reflects tableName in db
   void _navigateAndDisplayList(BuildContext context, String title) async {
-    final currentList = _queryAll(title);
-    print(currentList);
+    List<Map<String, dynamic>> currentMapsFromDB = await _queryAll(title);
+
+    List<String> currentList = new List<String>();
+    for (var map in currentMapsFromDB) {
+      currentList.add(map["name"].toString());
+    }
 
     final modifiedList = await Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) =>
-              DrawerWidget(items: widget.sampleList, title: title)),
+          builder: (context) => DrawerWidget(items: currentList, title: title)),
     );
 
     print(modifiedList);

@@ -2,16 +2,15 @@
 [OK] be able to create new drawers
 [OK] add name to drawers
 [] drawers cannot have the same name use Forms perhaps or new dialog
-[] update database upon making a new drawer
-[] get drawers from database into list
+[OK] update database upon making a new drawer
+[] get drawers from database into list initial setup
 
-
+[] store modified list into database
 
 [OK] create database helper
 [OK] be able to insert data into database
-[] insert data according to list of items
+[OK] insert data according to list of items in table
 [] be able to read data from database
-[] be able to remove item from database
 [] be able to query all items in database sorted after name
 [OK] parameterize insert() and queryAllRows() with table name
 
@@ -20,7 +19,7 @@
 [] figure out read on startup and write on closing of app
 
 [OK] pass chosen drawer name to drawerWidget from main page
-[] pass drawer items to drawerWidget from main page
+[OK] pass drawer items to drawerWidget from main page
 [OK] add back propagation of updated list from drawer to
 [OK] fix physical back button behaviour
 
