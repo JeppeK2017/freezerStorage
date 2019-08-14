@@ -3,18 +3,18 @@
 [OK] add name to drawers
 [] drawers cannot have the same name use Forms perhaps or new dialog
 [] update database upon making a new drawer
+[] get drawers from database into list
 
 
-[] add some kind of database storage sqflite
+
 [OK] create database helper
 [OK] be able to insert data into database
 [] insert data according to list of items
 [] be able to read data from database
 [] be able to remove item from database
 [] be able to query all items in database sorted after name
-[] parameterize insert() and queryAllRows() with table name
+[OK] parameterize insert() and queryAllRows() with table name
 
-[] create new tables for drawers
 [] clean up main page to only contain list of drawers, remove Expanded()
 
 [] figure out read on startup and write on closing of app

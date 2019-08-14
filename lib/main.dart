@@ -77,11 +77,11 @@ class _MyHomePageState extends State<MyHomePage> {
             children: <Widget>[
               RaisedButton(
                 child: Text("insert"),
-                onPressed: () => _insert(),
+                onPressed: () => _insert("a"),
               ),
               RaisedButton(
                 child: Text("query"),
-                onPressed: () => _query(),
+                onPressed: () => _queryAll("a"),
               )
             ],
           )
@@ -101,31 +101,45 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   // insert into a table in database
-  _insert() async {
+  void _insert(String tableName) async {
     Map<String, dynamic> row = {"name": 'Bob'};
-    final id = await widget.dbHelper.insert(row);
-    print('inserted row id: $id');
+    final id = await widget.dbHelper.insert(row, tableName);
+    print("inserted row id: $id into table $tableName");
   }
 
   // query all rows of table in database
-  _query() async {
-    final allRows = await widget.dbHelper.queryAllRows();
-    print("query all rows");
+  Future<List<Map<String, dynamic>>> _queryAll(String tableName) async {
+    final allRows = await widget.dbHelper.queryAllRows(tableName);
+    print("QuerryAllRows -----------------------------------------");
     allRows.forEach((row) => print(row));
+    return allRows;
   }
 
+  void _newTable(String tableName) async {
+    await widget.dbHelper.newTable(tableName);
+    print("added table named $tableName");
+  }
+
+  // title is the name of the drawer and reflects tableName in db
   void _navigateAndDisplayList(BuildContext context, String title) async {
-    final result = await Navigator.push(
+    final currentList = _queryAll(title);
+    print(currentList);
+
+    final modifiedList = await Navigator.push(
       context,
       MaterialPageRoute(
           builder: (context) =>
               DrawerWidget(items: widget.sampleList, title: title)),
     );
-    print(result);
+
+    print(modifiedList);
   }
+
+  void _storeModifiedList(String drawerName) {}
 
   void _addDrawer(String newName) {
     if (!_drawers.contains(newName)) {
+      _newTable(newName);
       setState(() {
         _drawers.add(newName);
       });

@@ -38,13 +38,24 @@ class DatabaseHelper {
     ''');
   }
 
-  Future<int> insert(Map<String, dynamic> row) async {
+  Future<int> insert(Map<String, dynamic> row, String tableName) async {
     Database db = await instance.database;
-    return await db.insert("my_table", row);
+    return await db.insert(tableName, row);
   }
 
-  Future<List<Map<String, dynamic>>> queryAllRows() async {
+  Future<List<Map<String, dynamic>>> queryAllRows(String tableName) async {
     Database db = await instance.database;
-    return await db.query('my_table');
+    return await db.query(tableName);
+  }
+
+  // creates a new table based on given string
+  void newTable(String tableName) async {
+    Database db = await instance.database;
+    await db.execute('''
+          CREATE TABLE $tableName (
+          _id INTEGER PRIMARY KEY,
+          name TEXT NOT NULL
+          )
+    ''');
   }
 }
