@@ -59,8 +59,13 @@ class DatabaseHelper {
     ''');
   }
 
-//  void replace(String tablename) async {
-//    Database db = await instance.database;
-//    await db.execute(sql)
-//  }
+  Future<List<String>> getAllTables() async {
+    Database db = await instance.database;
+
+    List<Map<String, dynamic>> tables = await db.rawQuery('''
+          SELECT name FROM sqlite_master WHERE type = 'table' AND name NOT LIKE 'sqlite_%' AND name NOT LIKE'android_%';
+    ''');
+
+    return new List.generate(tables.length, (i) => tables[i]['name']);
+  }
 }

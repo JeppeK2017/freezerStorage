@@ -34,14 +34,26 @@ class MyHomePage extends StatefulWidget {
   final dbHelper = DatabaseHelper.instance;
 
   final String title;
-  final List<String> sampleList = ["abc", "def", "ghi"];
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<String> _drawers = new List<String>();
+  List<String> _drawers = new List<String>();
+
+  @override
+  void initState() {
+    print(
+        "initial setup ---------------------------------------------------------------");
+    _setupInitialDrawers().then((result) {
+      setState(() {
+        _drawers = result;
+        print("initila drawers $_drawers");
+      });
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
               RaisedButton(
                 child: Text("query"),
                 onPressed: () => _queryAll("a"),
-              )
+              ),
             ],
           )
         ],
@@ -118,6 +130,12 @@ class _MyHomePageState extends State<MyHomePage> {
   void _newTable(String tableName) async {
     await widget.dbHelper.newTable(tableName);
     print("added table named $tableName");
+  }
+
+  // TODO this should not be void
+  Future<List<String>> _setupInitialDrawers() async {
+    List<String> drawers = await widget.dbHelper.getAllTables();
+    return drawers;
   }
 
   // title is the name of the drawer and reflects tableName in db

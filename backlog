@@ -3,10 +3,10 @@
 [OK] add name to drawers
 [] drawers cannot have the same name use Forms perhaps or new dialog
 [OK] update database upon making a new drawer
-[] get drawers from database into list initial setup
+[OK] get drawers from database into list initial setup
 
 [OK] store modified list into database
-[] _insert method should insert based on the added items from list view
+[OK] _insert method should insert based on the added items from list view
 
 [] handle identical items when inserting into database
 [] handle removal of items via length
@@ -22,7 +22,6 @@
 
 [] clean up main page to only contain list of drawers, remove Expanded()
 
-[] figure out read on startup and write on closing of app
 
 [OK] pass chosen drawer name to drawerWidget from main page
 [OK] pass drawer items to drawerWidget from main page
