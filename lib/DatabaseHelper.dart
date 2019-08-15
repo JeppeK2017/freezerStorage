@@ -29,13 +29,13 @@ class DatabaseHelper {
   }
 
   Future _onCreate(Database db, int version) async {
-    await db.execute('''
-          CREATE TABLE my_table (
-            _id INTEGER PRIMARY KEY,
-            name TEXT NOT NULL
-          )
-          
-    ''');
+//    await db.execute('''
+//          CREATE TABLE my_table (
+//            _id INTEGER PRIMARY KEY,
+//            name TEXT NOT NULL
+//          )
+//
+//    ''');
   }
 
   Future<int> insert(Map<String, dynamic> row, String tableName) async {

@@ -44,8 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-    print(
-        "initial setup ---------------------------------------------------------------");
+    //TODO this is a little hack I think
     _setupInitialDrawers().then((result) {
       setState(() {
         _drawers = result;
@@ -89,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
             children: <Widget>[
               RaisedButton(
                 child: Text("insert"),
-                onPressed: () => _insert("a"),
+                onPressed: () => _insert("a", "debug"),
               ),
               RaisedButton(
                 child: Text("query"),
@@ -113,8 +112,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   // insert into a table in database
-  void _insert(String tableName) async {
-    Map<String, dynamic> row = {"name": 'Bob'};
+  void _insert(String tableName, String itemName) async {
+    Map<String, dynamic> row = {"name": itemName};
     final id = await widget.dbHelper.insert(row, tableName);
     print("inserted row id: $id into table $tableName");
   }
@@ -163,7 +162,7 @@ class _MyHomePageState extends State<MyHomePage> {
           .removeWhere((String element) => referenceList.contains(element));
       // Insert into database. Title being table name
 
-      modifiedList.forEach((item) => _insert(title));
+      modifiedList.forEach((item) => _insert(title, item));
     }
 
     // modifiedList smaller than currentList => removed items
@@ -175,8 +174,6 @@ class _MyHomePageState extends State<MyHomePage> {
     print(currentList);
     print(modifiedList);
   }
-
-  void _storeModifiedList(String drawerName) {}
 
   void _addDrawer(String newName) {
     if (!_drawers.contains(newName)) {
