@@ -13,6 +13,8 @@ https://stackoverflow.com/questions/51901002/is-there-a-way-to-load-async-data-o
 
 [] handle identical items when inserting into database
 
+[] figure out how to know if a drawer has been filled with new items, but have the same size as before
+
 
 [] delete item from item page
 [] show alert dialog with confirmation of delete
