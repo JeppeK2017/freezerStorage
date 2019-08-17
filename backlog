@@ -5,18 +5,30 @@
 [OK] update database upon making a new drawer
 [OK] get drawers from database into list initial setup
 
+[] fix loading/hack of initial drawer with builder and loading icon
+https://stackoverflow.com/questions/51901002/is-there-a-way-to-load-async-data-on-initstate-method
+
 [OK] store modified list into database
 [OK] _insert method should insert based on the added items from list view
 
 [] handle identical items when inserting into database
-[] handle removal of items via length
+
+
+[] delete item from item page
+[] show alert dialog with confirmation of delete
+[] handle removal of items via length and update database
+
+
+[] remove debug print
+
+[] change name on drawer
+[] edit item name and data
 
 
 [OK] create database helper
 [OK] be able to insert data into database
 [OK] insert data according to list of items in table
 [] be able to read data from database
-[] be able to remove data from database
 [] be able to query all items in database sorted after name
 [OK] parameterize insert() and queryAllRows() with table name
 

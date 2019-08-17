@@ -28,6 +28,9 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             itemBuilder: (context, int index) {
               return (ListTile(
                 title: Text(widget.items[index]),
+                trailing: IconButton(
+                    icon: Icon(Icons.delete),
+                    onPressed: () => _deleteItem(widget.items[index])),
               ));
             },
           ),
@@ -45,10 +48,18 @@ class _DrawerWidgetState extends State<DrawerWidget> {
         onWillPop: () => _requestPop(context));
   }
 
-  void _addItem(String name) async {
+  void _addItem(String name) {
     setState(() {
       print(widget.items);
       widget.items.add(name);
+      print(widget.items);
+    });
+  }
+
+  void _deleteItem(String name) {
+    setState(() {
+      print(widget.items);
+      widget.items.remove(name);
       print(widget.items);
     });
   }
